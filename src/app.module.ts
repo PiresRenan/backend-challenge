@@ -1,27 +1,33 @@
 /* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
+import { TasksModule } from './tasks/tasks.module';
+import { KafkaModule } from './kafka/kafka.module';
+import { RedisModule } from './redis/redis.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
+import { User } from './users/entities/user.entity';
+import { Task } from './tasks/entities/task.entity';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    UsersModule,
+    // Configuracao do Banco de dados PostgreSQL
     TypeOrmModule.forRoot({ 
       type: process.env.DB_TYPE as any,
-      host: process.env.PG_HOST,
-      port: parseInt(process.env.PG_PORT),
-      username: process.env.PG_USER,
-      password: process.env.PG_PASSWORD,
-      database: process.env.PG_NAME,
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      host: process.env.PG_HOST || 'localhost',
+      port: parseInt(process.env.PG_PORT) || 5432,
+      username: process.env.PG_USER || 'postgres',
+      password: process.env.PG_PASSWORD || 'postgres',
+      database: process.env.PG_NAME || 'postgres',
+      entities: [ User, Task ],
       synchronize: true,
-     }),
+    }),
+    UsersModule,
+    KafkaModule,
+    RedisModule,
+    TasksModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+
 })
 export class AppModule {}
