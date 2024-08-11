@@ -9,6 +9,8 @@ async function bootstrap() {
     .setTitle('Usuarios e Tarefas')
     .setDescription('API para manipulacao de usuarios e tarefas')
     .setVersion('1.0')
+    .addTag('users')
+    .addTag('tasks')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
