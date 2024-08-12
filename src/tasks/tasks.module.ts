@@ -7,8 +7,8 @@ import { RedisModule } from '../redis/redis.module';
 import { KafkaModule } from '../kafka/kafka.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Task]), RedisModule, KafkaModule],
-  controllers: [TasksController],
-  providers: [TasksService],
+  imports: [TypeOrmModule.forFeature([Task]), RedisModule, KafkaModule], // imports adicionais  para o TypeORM, Redis e Kafka
+  controllers: [TasksController], // controllers adicionais
+  providers: [TasksService],  // providers adicionais
 })
 export class TasksModule {}

@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -29,19 +28,23 @@ export class TasksService {
   }
 
   async findAll(): Promise<Task[]> {
+    // Método para buscar todas as tarefas
     return this.taskRepository.find();
   }
 
   async findOne(id: string): Promise<Task> {
+    // Método para buscar uma tarefa pelo ID
     return this.taskRepository.findOne({ where: { id } });
   }
 
   async update(id: string, createTaskDto: CreateTaskDto): Promise<Task> {
+    // Método para atualizar uma tarefa pelo ID
     await this.taskRepository.update(id, createTaskDto);
     return this.findOne(id);
   }
 
   async remove(id: string): Promise<void> {
+    // Método para remover uma tarefa pelo ID
     await this.taskRepository.delete(id);
   }
 }

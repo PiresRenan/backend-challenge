@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { UsersModule } from './users/users.module';
 import { TasksModule } from './tasks/tasks.module';
@@ -23,10 +22,10 @@ import { Task } from './tasks/entities/task.entity';
       entities: [ User, Task ],
       synchronize: true,
     }),
-    UsersModule,
-    KafkaModule,
-    RedisModule,
-    TasksModule,
+    UsersModule, // Módulo responsável pela gestão de usuários
+    TasksModule, // Módulo responsável pela gestão de tarefas
+    KafkaModule, // Módulo responsável pela integração com Kafka
+    RedisModule, // Módulo responsável pela integração com Redis
   ],
 
 })
